@@ -34,7 +34,7 @@ nav a {
 }
 
 section {
-    padding: 60px 20px;
+    padding: 10px 20px;
     max-width: 900px;
     margin: auto;
 }
@@ -58,4 +58,20 @@ footer {
     text-align: center;
     padding: 20px;
     background: #020617;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: none;
+  background-color: #007acc;
+  color: white;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 20px;
+  word-break: break-all;
 }
