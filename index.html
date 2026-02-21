@@ -1,86 +1,137 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Abhinaya Kunginkar | Software Developer</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header>
-      <nav>
-        <h1>Abhinaya Kunginkar</h1>
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abhinaya Kunginkar | Backend Engineer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: '#ef4444'
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    .glass { backdrop-filter: blur(10px); background: rgba(24,24,27,0.6); }
+  </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 font-sans">
 
-    <section class="hero">
-      <h2>Hi, I'm Abhinaya Kunginkar</h2>
-      <p>Software Developer | Backend | Golang | System Design</p>
-    </section>
+  <!-- Navbar -->
+  <header class="fixed w-full top-0 z-50 glass border-b border-zinc-800">
+    <nav class="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
+      <h1 class="font-bold text-lg">Abhinaya Kunginkar</h1>
+      <div class="space-x-6 hidden md:block">
+        <a href="#about" class="hover:text-accent">About</a>
+        <a href="#projects" class="hover:text-accent">Projects</a>
+        <a href="#experience" class="hover:text-accent">Experience</a>
+        <a href="#contact" class="hover:text-accent">Contact</a>
+      </div>
+    </nav>
+  </header>
 
-    <section id="about">
-      <h2>About Me</h2>
-      <p>
-        I’m a software developer passionate about building scalable systems and
-        solving real-world problems. Currently working on backend microservices
-        and system design.
+  <!-- Hero -->
+  <section class="min-h-screen flex items-center justify-center text-center px-6">
+    <div data-aos="fade-up">
+      <h2 class="text-4xl md:text-6xl font-bold mb-6">
+        Hi, I'm <span class="text-accent">Abhinaya</span>
+      </h2>
+      <p class="text-xl md:text-2xl text-zinc-400 mb-8">
+        Backend & Distributed Systems Engineer
       </p>
-    </section>
-
-    <section id="tools">
-      <h1>🧬 Distributed ID Generator</h1>
-      <p>Snowflake-Inspired 64-bit unique ID</p>
-
-      <button id="generateBtn">Generate ID</button>
-
-      <div id="result"></div>
-
-      <script src="script.js"></script>
-    </section>
-
-    <section id="skills">
-      <h2>Skills</h2>
-      <div class="skills">
-        <span>Golang</span>
-        <span>Python</span>
-        <span>Kafka</span>
-        <span>PostgreSQL</span>
-        <span>Docker</span>
-        <span>System Design</span>
+      <p class="max-w-2xl mx-auto text-zinc-500 mb-10">
+        I build scalable microservices and event-driven systems using Golang, Kafka, and cloud-native technologies.
+      </p>
+      <div class="space-x-4">
+        <a href="#projects" class="bg-accent hover:bg-red-500 px-6 py-3 rounded-xl font-semibold">View Projects</a>
+        <a href="#contact" class="border border-zinc-700 hover:border-accent px-6 py-3 rounded-xl">Contact Me</a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="projects">
-      <h2>Projects</h2>
+  <!-- About -->
+  <section id="about" class="py-24 max-w-6xl mx-auto px-6" data-aos="fade-up">
+    <h3 class="text-3xl font-bold mb-6">About Me</h3>
+    <p class="text-zinc-400 leading-relaxed max-w-3xl">
+      Backend engineer at Spintly specializing in high-scale microservices, event-driven architectures, and secure access control systems. I enjoy building reliable distributed platforms that solve real-world problems.
+    </p>
+  </section>
 
-      <div class="project">
-        <h3>Banking Ledger System</h3>
-        <p>ACID-compliant ledger with asynchronous processing using Kafka.</p>
-        <a href="#">GitHub</a>
+  <!-- Skills -->
+  <section class="py-24 bg-zinc-900/40">
+    <div class="max-w-6xl mx-auto px-6" data-aos="fade-up">
+      <h3 class="text-3xl font-bold mb-10">Skills</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl bg-zinc-900 border border-zinc-800">
+          <h4 class="font-semibold mb-3 text-accent">Languages</h4>
+          <p class="text-zinc-400">Golang, Python</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-zinc-900 border border-zinc-800">
+          <h4 class="font-semibold mb-3 text-accent">Backend</h4>
+          <p class="text-zinc-400">Microservices, Kafka, REST APIs, ACID Systems</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-zinc-900 border border-zinc-800">
+          <h4 class="font-semibold mb-3 text-accent">Infrastructure</h4>
+          <p class="text-zinc-400">Docker, PostgreSQL, MongoDB, AWS S3</p>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <div class="project">
-        <h3>URL Shortener</h3>
-        <p>6-digit alphanumeric short URL service built in Golang.</p>
-        <a href="#">GitHub</a>
+  <!-- Projects -->
+  <section id="projects" class="py-24 max-w-6xl mx-auto px-6">
+    <h3 class="text-3xl font-bold mb-10" data-aos="fade-up">Projects</h3>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="p-6 rounded-2xl bg-zinc-900 border border-zinc-800" data-aos="zoom-in">
+        <h4 class="font-semibold text-xl mb-2">Banking Ledger System</h4>
+        <p class="text-zinc-400 mb-4">ACID-compliant ledger with async processing.</p>
+        <span class="text-sm text-accent">Golang • Kafka • PostgreSQL</span>
       </div>
-    </section>
+      <div class="p-6 rounded-2xl bg-zinc-900 border border-zinc-800" data-aos="zoom-in">
+        <h4 class="font-semibold text-xl mb-2">URL Shortener</h4>
+        <p class="text-zinc-400 mb-4">6-digit high-performance URL shortening service.</p>
+        <span class="text-sm text-accent">Golang • Redis</span>
+      </div>
+    </div>
+  </section>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Email: abhinayakunginkar.sitcomp@gmail.com</p>
-      <p>GitHub: github.com/abhinaya-k</p>
-      <p>LinkedIn: linkedin.com/in/abhinaya-kunginkar</p>
-    </section>
+  <!-- Experience -->
+  <section id="experience" class="py-24 bg-zinc-900/40">
+    <div class="max-w-6xl mx-auto px-6" data-aos="fade-up">
+      <h3 class="text-3xl font-bold mb-10">Experience</h3>
+      <div class="p-6 rounded-2xl bg-zinc-900 border border-zinc-800">
+        <h4 class="font-semibold text-xl">Spintly — Backend Engineer</h4>
+        <ul class="list-disc list-inside text-zinc-400 mt-4 space-y-2">
+          <li>Managing 5 production microservices</li>
+          <li>Migrated system to Kafka event-driven architecture</li>
+          <li>Integrated Cisco cameras with access platform</li>
+          <li>Working on ZKTeco controller integrations</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-      <p>© 2026 Abhinaya Kunginkar</p>
-    </footer>
-  </body>
+  <!-- Contact -->
+  <section id="contact" class="py-24 max-w-4xl mx-auto px-6 text-center" data-aos="fade-up">
+    <h3 class="text-3xl font-bold mb-6">Let's Connect</h3>
+    <p class="text-zinc-400 mb-8">Open to backend and platform engineering opportunities.</p>
+    <a href="mailto:your@email.com" class="bg-accent hover:bg-red-500 px-8 py-4 rounded-xl font-semibold">Email Me</a>
+  </section>
+
+  <footer class="text-center py-8 text-zinc-500 border-t border-zinc-800">
+    © 2026 Abhinaya K
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true, duration: 800 });
+  </script>
+</body>
 </html>
