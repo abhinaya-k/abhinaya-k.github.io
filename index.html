@@ -32,6 +32,7 @@
         <a href="#about" class="hover:text-accent">About</a>
         <a href="#projects" class="hover:text-accent">Projects</a>
         <a href="#experience" class="hover:text-accent">Experience</a>
+        <a href="#tools" class="hover:text-accent">Tools</a>
         <a href="#contact" class="hover:text-accent">Contact</a>
       </div>
     </nav>
@@ -71,7 +72,7 @@
       <div class="grid md:grid-cols-3 gap-6">
         <div class="p-6 rounded-2xl bg-zinc-900 border border-zinc-800">
           <h4 class="font-semibold mb-3 text-accent">Languages</h4>
-          <p class="text-zinc-400">Golang, Python</p>
+          <p class="text-zinc-400">Golang, NodeJS, Python</p>
         </div>
         <div class="p-6 rounded-2xl bg-zinc-900 border border-zinc-800">
           <h4 class="font-semibold mb-3 text-accent">Backend</h4>
@@ -118,20 +119,107 @@
     </div>
   </section>
 
+  <section id="tools" class="py-24 max-w-6xl mx-auto px-6">
+    <h3 class="text-3xl font-bold mb-10" data-aos="fade-up">Tools</h3>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Tool Card: Distributed ID Generator -->
+      <div class="p-6 rounded-2xl bg-zinc-900 border border-zinc-800" data-aos="zoom-in">
+        <h4 class="font-semibold text-xl mb-2">🧬 Distributed ID Generator</h4>
+        <p class="text-zinc-400 mb-6">Snowflake-inspired 64-bit unique ID generator.</p>
+
+        <div class="flex flex-wrap gap-3">
+          <button id="generateBtn" class="bg-accent hover:bg-red-500 px-5 py-2 rounded-lg font-semibold">
+            Generate ID
+          </button>
+          <button id="copyBtn" class="border border-zinc-700 hover:border-accent px-5 py-2 rounded-lg">
+            Copy
+          </button>
+        </div>
+
+        <div id="result" class="mt-6 p-4 rounded-lg bg-zinc-950 border border-zinc-800 text-accent font-mono break-all min-h-[56px] flex items-center"></div>
+      </div>
+
+      <!-- Placeholder for future tools -->
+      <div class="p-6 rounded-2xl bg-zinc-900/40 border border-dashed border-zinc-800 flex items-center justify-center text-zinc-500">
+        More tools coming soon...
+      </div>
+    </div>
+  </section>
+
   <!-- Contact -->
   <section id="contact" class="py-24 max-w-4xl mx-auto px-6 text-center" data-aos="fade-up">
     <h3 class="text-3xl font-bold mb-6">Let's Connect</h3>
     <p class="text-zinc-400 mb-8">Open to backend and platform engineering opportunities.</p>
-    <a href="mailto:your@email.com" class="bg-accent hover:bg-red-500 px-8 py-4 rounded-xl font-semibold">Email Me</a>
+    <a href="mailto:abhinayakunginkar.sitcomp@gmail.com" class="bg-accent hover:bg-red-500 px-8 py-4 rounded-xl font-semibold">Email Me</a>
   </section>
 
   <footer class="text-center py-8 text-zinc-500 border-t border-zinc-800">
-    © 2026 Abhinaya K
+    © 2026 Abhinaya Kunginkar
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ once: true, duration: 800 });
   </script>
+
+  <script src="script.js"></script>
+  <script>
+    // Hook into user's generator if available
+    const generateBtn = document.getElementById('generateBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const resultEl = document.getElementById('result');
+
+    function animateNumber(finalValue) {
+      if (!finalValue) return;
+      const duration = 300;
+      const start = performance.now();
+      const startVal = 0n;
+      const endVal = BigInt(finalValue);
+
+      function frame(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const current = startVal + BigInt(Math.floor(Number(endVal) * progress));
+        resultEl.textContent = progress < 1 ? current.toString() : finalValue;
+        if (progress < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    if (generateBtn) {
+      generateBtn.addEventListener('click', () => {
+        let generated;
+
+        // Try common function names user might have
+        if (typeof generateId === 'function') generated = generateId();
+        else if (typeof generateID === 'function') generated = generateID();
+        else if (typeof generateSnowflake === 'function') generated = generateSnowflake();
+
+        // Fallback if script doesn't expose
+        if (!generated) {
+          generated = Date.now().toString();
+        }
+
+        animateNumber(generated.toString());
+      });
+    }
+
+    if (copyBtn) {
+      copyBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16h8M8 12h8m-9 8h10a2 2 0 002-2V6a2 2 0 00-2-2H7a2 2 0 00-2 2v12a2 2 0 002 2zm3-16V4a2 2 0 012-2h6a2 2 0 012 2v2" />
+        </svg>
+      `;
+
+      copyBtn.addEventListener('click', async () => {
+        const text = resultEl.textContent.trim();
+        if (!text) return;
+        await navigator.clipboard.writeText(text);
+        copyBtn.classList.add('text-accent');
+        setTimeout(() => copyBtn.classList.remove('text-accent'), 800);
+      });
+    }
+  </script>
+
 </body>
 </html>
