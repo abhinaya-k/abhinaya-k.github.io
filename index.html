@@ -140,9 +140,43 @@
         <div id="result" class="mt-6 p-4 rounded-lg bg-zinc-950 border border-zinc-800 text-accent font-mono break-all min-h-[56px] flex items-center"></div>
       </div>
 
-      <!-- Placeholder for future tools -->
-      <div class="p-6 rounded-2xl bg-zinc-900/40 border border-dashed border-zinc-800 flex items-center justify-center text-zinc-500">
-        More tools coming soon...
+      <div class="p-6 rounded-2xl bg-zinc-900/40 border border border-zinc-800 " data-aos="zoom-in">
+        <!-- Tool Card: Password Generator -->
+      <!-- <div class="p-6 rounded-2xl bg-zinc-900 border border-zinc-800" data-aos="zoom-in"> -->
+        <h4 class="font-semibold text-xl mb-2">🔐 Password Generator</h4>
+        <p class="text-zinc-400 mb-6">Generate strong, secure random passwords.</p>
+
+        <div class="flex flex-wrap items-center gap-4 mb-4">
+          <label class="text-sm text-zinc-400">Length</label>
+          <input id="pwdLength" type="number" min="6" max="64" value="16" class="w-20 bg-zinc-950 border border-zinc-800 rounded-lg px-2 py-1 text-center" />
+          <label class="text-sm text-zinc-400">Max Length (64)</label>
+        </div>
+
+        <!-- Options -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6 text-sm text-zinc-400">
+          <label class="flex items-center gap-2"><input type="checkbox" id="optUpper" checked> Uppercase</label>
+          <label class="flex items-center gap-2"><input type="checkbox" id="optLower" checked> Lowercase</label>
+          <label class="flex items-center gap-2"><input type="checkbox" id="optNumber" checked> Numbers</label>
+          <label class="flex items-center gap-2"><input type="checkbox" id="optSymbol" checked> Symbols</label>
+          <label class="flex items-center gap-2"><input type="checkbox" id="optSimilar"> Avoid similar</label>
+        </div>
+
+        <!-- Strength Meter -->
+        <div class="mb-4">
+          <div class="h-2 bg-zinc-800 rounded-full overflow-hidden">
+            <div id="pwdStrengthBar" class="h-full w-0 bg-red-500 transition-all"></div>
+          </div>
+          <p id="pwdStrengthText" class="text-xs text-zinc-500 mt-2">Strength: —</p>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button id="generatePwdBtn" class="bg-accent hover:bg-red-500 px-5 py-2 rounded-lg font-semibold">Generate Password</button>
+          <button id="copyPwdBtn" class="border border-zinc-700 hover:border-accent px-5 py-2 rounded-lg"></button>
+        </div>
+
+        <div id="pwdResult" class="mt-6 p-4 rounded-lg bg-zinc-950 border border-zinc-800 text-accent font-mono break-all min-h-[56px] flex items-center"></div>
+      <!-- </div> -->
+      </div>
       </div>
     </div>
   </section>
@@ -164,7 +198,7 @@
   </script>
 
   <script src="script.js"></script>
-  <script>
+ <script>
     // Hook into user's generator if available
     const generateBtn = document.getElementById('generateBtn');
     const copyBtn = document.getElementById('copyBtn');
@@ -219,7 +253,47 @@
         setTimeout(() => copyBtn.classList.remove('text-accent'), 800);
       });
     }
-  </script>
+  
+    // ===== Password Generator =====
+    const pwdBtn = document.getElementById('generatePwdBtn');
+    const pwdCopyBtn = document.getElementById('copyPwdBtn');
+    const pwdResult = document.getElementById('pwdResult');
+    const pwdLengthInput = document.getElementById('pwdLength');
 
+    const optUpper = document.getElementById('optUpper');
+    const optLower = document.getElementById('optLower');
+    const optNumber = document.getElementById('optNumber');
+    const optSymbol = document.getElementById('optSymbol');
+    const optSimilar = document.getElementById('optSimilar');
+
+    const strengthBar = document.getElementById('pwdStrengthBar');
+    const strengthText = document.getElementById('pwdStrengthText');
+
+    
+    if (pwdBtn) {
+      pwdBtn.addEventListener('click', () => {
+        const len = Math.min(Math.max(parseInt(pwdLengthInput.value) || 16, 6), 64);
+        const pwd = generatePassword(len);
+        pwdResult.textContent = pwd;
+        updateStrength(pwd);
+      });
+    }
+
+    if (pwdCopyBtn) {
+      pwdCopyBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16h8M8 12h8m-9 8h10a2 2 0 002-2V6a2 2 0 00-2-2H7a2 2 0 00-2 2v12a2 2 0 002 2zm3-16V4a2 2 0 012-2h6a2 2 0 012 2v2" />
+        </svg>
+      `;
+
+      pwdCopyBtn.addEventListener('click', async () => {
+        const text = pwdResult.textContent.trim();
+        if (!text) return;
+        await navigator.clipboard.writeText(text);
+        pwdCopyBtn.classList.add('text-accent');
+        setTimeout(() => pwdCopyBtn.classList.remove('text-accent'), 800);
+      });
+    }
+  </script>
 </body>
 </html>
